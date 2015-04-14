@@ -69,7 +69,7 @@ public class SoundRecorder3gpp extends SoundRecorder {
     }
 
     @Override
-    public Uri save() {
+    public File save() {
 
         if (audioFile == null)
             return null;
@@ -86,7 +86,8 @@ public class SoundRecorder3gpp extends SoundRecorder {
         Uri newUri = contentResolver.insert(base, values);
 
         //activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, newUri));
-        return newUri;
+        //return newUri;
+        return null;
     }
 
 }

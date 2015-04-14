@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -11,10 +12,9 @@ import android.widget.TextView;
 
 import com.drl.lutz.lullabyapp.R;
 import com.drl.lutz.lullabyapp.logic.SoundRecorder;
-import com.drl.lutz.lullabyapp.logic.SoundRecorderExt;
-import com.drl.lutz.lullabyapp.logic.SoundRecorderHq;
 import com.drl.lutz.lullabyapp.logic.SoundRecorderWav;
-import com.drl.lutz.lullabyapp.logic.SoundRecorderWav2;
+
+import java.io.File;
 
 
 public class RecorderActivity extends FullscreenActivity {
@@ -34,7 +34,7 @@ public class RecorderActivity extends FullscreenActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorder);
 
-        recorder = new SoundRecorderWav2(getApplicationContext());
+        recorder = new SoundRecorderWav(getApplicationContext());
     }
 
     @Override
@@ -140,6 +140,15 @@ public class RecorderActivity extends FullscreenActivity {
         state = RecorderState.INIT;
     }
 
+    public void saveRecording() {
+
+        try {
+            File output = recorder.save();
+        } catch (Exception e) {
+            this.showAlert("Error","Error writing sound file: "+e.toString());
+        }
+    }
+
     private String convertTimeString(long milliseconds) {
 
         long hsecs= (milliseconds % 1000) / 100;
@@ -164,9 +173,10 @@ public class RecorderActivity extends FullscreenActivity {
     }
 
     public void onAcceptButtonClicked(View view) {
+
+        saveRecording();
+
         startActivity(new Intent(this, LocationActivity.class));
         overridePendingTransition(R.anim.trans_in, R.anim.trans_out);
-
-        Uri recordedFile = recorder.save();
     }
 }
