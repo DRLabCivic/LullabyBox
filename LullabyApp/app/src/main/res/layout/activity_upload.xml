@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/topLayout"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/upload_title_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/titleText"/>
+
+        <TextView
+            android:id="@+id/bodyText"
+            android:text="@string/upload_body_text"
+            style="@style/normalText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"/>
+
+        <ProgressBar
+            style="@style/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/bottomLayout">
+
+        <Button
+            android:id="@+id/doneButton"
+            style="@style/bigButton"
+            android:background="@drawable/accept_button"
+            android:onClick="onAcceptButtonClicked"
+            android:enabled="false"/>
+
+    </LinearLayout>
+
+</LinearLayout>

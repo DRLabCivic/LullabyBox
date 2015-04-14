@@ -17,6 +17,10 @@
     <string name="help_text_location">Tell us the place where you learned your lullaby. The app will give you suggestions once you typed in the cities name (English names only).</string>
     <string name="help_text_location_choose">Choose a location from the drop down menu to continue.</string>
     <string name="searchFieldHint">Type in the closest city</string>
+    <!-- Upload Activity -->
+    <string name="title_activity_upload">UploadActivity</string>
+    <string name="upload_title_text">Upload Lullaby</string>
+    <string name="upload_body_text">Sending lullaby...</string>
     <!-- Database Update Acvitiy -->
     <string name="title_activity_database_update">Lullaby Database Update</string>
     <string name="update_title_text">Updating Locations</string>

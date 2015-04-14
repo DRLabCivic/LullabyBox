@@ -113,7 +113,7 @@ public class SoundRecorderWav extends SoundRecorder {
     }
 
     @Override
-    public File save() throws Exception {
+    public File save() throws IOException {
 
         String filename = System.currentTimeMillis() + AUDIO_RECORDER_FILE_EXT_WAV;
 
@@ -123,7 +123,7 @@ public class SoundRecorderWav extends SoundRecorder {
 
         copyFile(getTempFile(),output);
         deleteTempFile();
-        return null;
+        return output;
     }
 
     @Override
@@ -136,7 +136,7 @@ public class SoundRecorderWav extends SoundRecorder {
         return file;
     }
 
-    public File copyFile(File src, File dst) throws FileNotFoundException,IOException {
+    public File copyFile(File src, File dst) throws IOException {
 
         InputStream in = new FileInputStream(src);
         OutputStream out = new FileOutputStream(dst);
@@ -154,8 +154,11 @@ public class SoundRecorderWav extends SoundRecorder {
     }
 
     private File getPath() {
-        String storageDir = Environment.getExternalStorageDirectory().getPath();
-        return new File(storageDir,AUDIO_RECORDER_FOLDER);
+        String baseDir = Environment.getExternalStorageDirectory().getPath();
+        File storageDir = new File(baseDir,AUDIO_RECORDER_FOLDER);
+        //create dir if non existent
+        storageDir.mkdirs();
+        return storageDir;
     }
 
     private void writeAudioDataToFile(RandomAccessFile fileWriter){

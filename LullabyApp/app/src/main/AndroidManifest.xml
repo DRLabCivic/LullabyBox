@@ -41,6 +41,15 @@
                 android:value="com.drl.lutz.lullabyapp.activities.RecorderActivity" />
         </activity>
         <activity
+            android:name=".activities.UploadActivity"
+            android:label="@string/title_activity_upload"
+            android:parentActivityName=".activities.LocationActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.drl.lutz.lullabyapp.activities.LocationActivity" />
+        </activity>
+        <activity
             android:name=".activities.DatabaseUpdateActivity"
             android:label="@string/title_activity_database_update"
             android:parentActivityName=".activities.MainActivity"

@@ -2,10 +2,14 @@ package com.drl.lutz.lullabyapp.database;
 
 import android.database.Cursor;
 
+import org.json.JSONObject;
+
+import java.io.Serializable;
+
 /**
  * Created by lutz on 12/04/15.
  */
-public class Location {
+public class Location implements Serializable {
 
     public long _id;
 
@@ -42,6 +46,23 @@ public class Location {
         this.population = population;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public String toJsonString() {
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("id", _id);
+            json.put("city", city);
+            json.put("country", country);
+            json.put("population", population);
+            json.put("latitude", latitude);
+            json.put("longitude", longitude);
+        } catch (Exception e) {
+            return "";
+        }
+
+        return json.toString();
     }
 
 

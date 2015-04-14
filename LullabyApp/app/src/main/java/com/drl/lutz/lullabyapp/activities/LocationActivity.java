@@ -1,6 +1,7 @@
 package com.drl.lutz.lullabyapp.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,17 +19,24 @@ import com.drl.lutz.lullabyapp.adapters.LocationCursorAdapter;
 import com.drl.lutz.lullabyapp.database.LocationDatabase;
 import com.drl.lutz.lullabyapp.views.LocationAutoCompleteView;
 
+import java.io.File;
+
 public class LocationActivity extends FullscreenActivity {
 
-    LocationDatabase database;
-
     Location choosenLocation = null;
+
+    File soundFile = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
+        //receive soundfile from recorder activity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            this.soundFile = (File)extras.get("soundFile");
+        }
 
         LocationCursorAdapter lcadapter = new LocationCursorAdapter(this, null, 0);
 
@@ -64,5 +72,16 @@ public class LocationActivity extends FullscreenActivity {
 
             choosenLocation = null;
         }
+    }
+
+    public void onNextButtonClicked(View view) {
+
+        Intent intent = new Intent(getBaseContext(), UploadActivity.class);
+        intent.putExtra("soundFile", this.soundFile);
+        intent.putExtra("location", this.choosenLocation);
+        startActivity(intent);
+        overridePendingTransition(R.anim.trans_in, R.anim.trans_out);
+
+        finish();
     }
 }

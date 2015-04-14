@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,6 +36,12 @@ public class RecorderActivity extends FullscreenActivity {
         setContentView(R.layout.activity_recorder);
 
         recorder = new SoundRecorderWav(getApplicationContext());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        resetRecording();
     }
 
     @Override
@@ -140,13 +147,10 @@ public class RecorderActivity extends FullscreenActivity {
         state = RecorderState.INIT;
     }
 
-    public void saveRecording() {
+    public File saveRecording() throws Exception {
 
-        try {
-            File output = recorder.save();
-        } catch (Exception e) {
-            this.showAlert("Error","Error writing sound file: "+e.toString());
-        }
+        File output = recorder.save();
+        return output;
     }
 
     private String convertTimeString(long milliseconds) {
@@ -174,9 +178,23 @@ public class RecorderActivity extends FullscreenActivity {
 
     public void onAcceptButtonClicked(View view) {
 
-        saveRecording();
+        File recordedFile;
+        try {
+            recordedFile = saveRecording();
+            if (recordedFile == null)
+                throw new Exception("file is null.");
+        } catch (Exception e) {
+            this.showAlert("Error", "Error writing sound file: " + e.toString());
+            return;
+        }
 
-        startActivity(new Intent(this, LocationActivity.class));
+        Intent intent = new Intent(getBaseContext(), LocationActivity.class);
+        intent.putExtra("soundFile", recordedFile);
+        startActivity(intent);
+
         overridePendingTransition(R.anim.trans_in, R.anim.trans_out);
+
+        finish();
+
     }
 }

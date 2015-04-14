@@ -101,16 +101,18 @@ abstract public class FullscreenActivity extends Activity {
         overridePendingTransition(R.anim.trans_in_back, R.anim.trans_out_back);
     }
 
-    public void showAlert(String title, String message) {
+    public void showAlert(final String title,final String message) {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Fuck it",
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    if (title == "Error")
+                        finish();
+                }
+            });
         alertDialog.show();
     }
 

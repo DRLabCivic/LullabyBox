@@ -2,6 +2,7 @@ package com.drl.lutz.lullabyapp.logic;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.drl.lutz.lullabyapp.database.Location;
 import com.loopj.android.http.AsyncHttpClient;
@@ -29,13 +30,14 @@ public class FileUploader {
         this.context = context;
     }
 
-    public void upload(final String urlString) throws Exception {
+    public void upload(final String urlString) throws FileNotFoundException {
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
 
         RequestParams params = new RequestParams();
         try {
-            params.put("soundfile", this.file);
+            params.put("file", this.file);
+            params.put("location", this.location.toJsonString());
         } catch(FileNotFoundException e) {
             throw e;
         }
@@ -49,6 +51,11 @@ public class FileUploader {
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                 //TODO: throw Exception
+            }
+
+            @Override
+            public void onProgress(int position, int length) {
+                Log.d("UPLOAD", " progress: pos:" + position + " len:" + length);
             }
         });
     }
