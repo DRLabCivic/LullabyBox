@@ -1,0 +1,86 @@
+<resources>
+
+    <item type="id" name="bottomLayout" />
+    <item type="id" name="topLayout" />
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/foreground</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="topLayout">
+        <item name="android:id">@id/topLayout</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_weight">0.65</item>
+    </style>
+
+    <style name="bottomLayout">
+        <item name="android:id">@id/bottomLayout</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_weight">0.35</item>
+    </style>
+
+    <!-- Text styles -->
+    <style name="normalText">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="normalTextBold" parent="normalText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="titleText" parent="normalText">
+        <item name="android:textSize">62sp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="smallText" parent="normalText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:color">@color/foreground2</item>
+    </style>
+
+    <style name="recordTimeText">
+        <item name="android:textSize">200sp</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <!-- BUTTONS & INPUT ELEMENTS -->
+    <style name="button">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_margin">20dp</item>
+    </style>
+
+    <style name="bigButton" parent="button">
+        <item name="android:layout_margin">40dp</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+    </style>
+
+    <style name="inputField" parent="normalText">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="progressBar" parent="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal">
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="spinner" parent="@android:style/Widget.DeviceDefault.ProgressBar.Small">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+</resources>

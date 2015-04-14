@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.drl.lutz.lullabyapp.activities.DatabaseUpdateActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/topLayout"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/update_title_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/titleText"/>
+
+        <TextView
+            android:id="@+id/bodyText"
+            android:text="@string/update_briefing_text"
+            style="@style/normalText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"/>
+
+        <ProgressBar
+            style="@style/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/bottomLayout">
+
+        <Button
+            android:id="@+id/startButton"
+            style="@style/bigButton"
+            android:background="@drawable/proceed_button"
+            android:onClick="OnStartButtonClicked"/>
+
+        <Button
+            android:id="@+id/acceptButton"
+            style="@style/bigButton"
+            android:background="@drawable/accept_button"
+            android:onClick="onAcceptButtonClicked"
+            android:enabled="false"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.drl.lutz.lullabyapp.activities.RecorderActivity"
+    >
+
+    <LinearLayout
+        style="@style/topLayout"
+        android:orientation="vertical"
+        android:onClick="onScreenClick">
+
+        <TextView
+            style="@style/recordTimeText"
+            android:id="@+id/recordTimeView"
+            android:text="@string/recordTimeStart"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            style="@style/normalText"
+            android:id="@+id/recordTimeHelpText"
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:text="@string/recordHelpTextStart"
+            android:gravity="center_horizontal|top" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/bottomLayout"
+        android:onClick="onScreenClick">
+
+        <View
+            style="@style/bigButton"
+            android:id="@+id/micIcon"
+            android:background="@drawable/mic_button"/>
+
+        <View
+            style="@style/bigButton"
+            android:id="@+id/recordIcon"
+            android:background="@drawable/record_dot"
+            android:visibility="gone" />
+
+        <Button
+            style="@style/bigButton"
+            android:id="@+id/restartButton"
+            android:background="@drawable/retry_button"
+            android:visibility="gone"
+            android:onClick="onRestartButtonClicked"/>
+
+        <Button
+            style="@style/bigButton"
+            android:id="@+id/acceptButton"
+            android:background="@drawable/accept_button"
+            android:visibility="gone"
+            android:onClick="onAcceptButtonClicked"/>
+
+    </LinearLayout>
+
+</LinearLayout>

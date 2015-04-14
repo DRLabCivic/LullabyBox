@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="background">#ff3a2c2c</color>
+    <color name="foreground">#FFFFFFFF</color>
+    <color name="foreground2">#FFAAAAAA</color>
+
+    <color name="buttonBgColorAccept">#ff009900</color>
+    <color name="buttonBgColorReject">#ffff0000</color>
+    <color name="buttonBgColorAction">#ffffcc22</color>
+
+    <color name="buttonBgColorDisabled">#32ffffff</color>
+
+
+</resources>
