@@ -1,6 +1,6 @@
 <?php
 
-    define('DIR_RECORDINGS', "recordings");
+    require "config.php";
 
     if (isset($_FILES['file'])) {
 

@@ -1,18 +1,15 @@
 package com.drl.lutz.lullabyapp.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.drl.lutz.lullabyapp.R;
-import com.drl.lutz.lullabyapp.adapters.LocationCursorAdapter;
 import com.drl.lutz.lullabyapp.database.Location;
-import com.drl.lutz.lullabyapp.database.LocationDatabase;
-import com.drl.lutz.lullabyapp.logic.FileUploader;
-import com.drl.lutz.lullabyapp.views.LocationAutoCompleteView;
+import com.drl.lutz.lullabyapp.utils.FileUploader;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.apache.http.Header;
 
 import java.io.File;
 
@@ -39,14 +36,35 @@ public class UploadActivity extends FullscreenActivity {
             Log.e("UPLOAD", "Location: " + location.toJsonString());
             Log.e("UPLOAD", "File: " + soundFile.getAbsolutePath().toString());
         } catch (Exception e) {
-            this.showAlert("Error","Error: "+e.toString());
+            showAlert("Error", "Error: " + e.toString());
             return;
         }
+
+        uploadLullaby(soundFile,location);
+    }
+
+    public void uploadLullaby(File soundFile,Location location) {
 
         FileUploader uploader = new FileUploader(getApplicationContext(),soundFile,location);
 
         try {
-            uploader.upload(UPLOAD_WEB_ADDRESS);
+            uploader.upload(UPLOAD_WEB_ADDRESS,  new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                    ((TextView)findViewById(R.id.bodyText)).setText(R.string.upload_body_text_finished);
+                    findViewById(R.id.doneButton).setEnabled(true);
+                }
+
+                @Override
+                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                    showAlert("Error", "Failed to upload file to server: " + throwable.toString());
+                }
+
+                @Override
+                public void onProgress(int position, int length) {
+                    Log.d("UPLOAD", " progress: pos:" + position + " len:" + length);
+                }
+            });
         } catch (Exception e) {
             this.showAlert("Error","Error uploading lullaby: "+e.toString());
             return;

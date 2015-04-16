@@ -1,19 +1,16 @@
 package com.drl.lutz.lullabyapp.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.drl.lutz.lullabyapp.R;
-import com.drl.lutz.lullabyapp.logic.SoundRecorder;
-import com.drl.lutz.lullabyapp.logic.SoundRecorderWav;
+import com.drl.lutz.lullabyapp.utils.SoundRecorder;
+import com.drl.lutz.lullabyapp.utils.SoundRecorderWav;
 
 import java.io.File;
 
@@ -36,6 +33,8 @@ public class RecorderActivity extends FullscreenActivity {
         setContentView(R.layout.activity_recorder);
 
         recorder = new SoundRecorderWav(getApplicationContext());
+
+        setIdleCloseTimer(15*1000); //15 seconds
     }
 
     @Override

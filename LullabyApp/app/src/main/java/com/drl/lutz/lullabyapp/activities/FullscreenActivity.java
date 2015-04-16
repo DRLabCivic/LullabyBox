@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.drl.lutz.lullabyapp.R;
+import com.drl.lutz.lullabyapp.utils.IdleTimer;
 
 /**
  * Created by lutz on 10/04/15.
@@ -25,6 +26,9 @@ abstract public class FullscreenActivity extends Activity {
         }
     };
     private boolean immersiveModeOn = false;
+
+    //idle timer closes activity
+    private IdleTimer idleTimer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,26 @@ abstract public class FullscreenActivity extends Activity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeMessages(0);
         mHideHandler.sendEmptyMessageDelayed(0, delayMillis);
+    }
+
+    //closes activity after beeing idle for too long
+    public void setIdleCloseTimer(int idleTime) {
+        idleTimer=new IdleTimer(15*1000,new IdleTimer.IdleTimerEventListener() {
+            @Override
+            public void onIdleTooLong() {
+                //close activity
+                finish();
+            }
+        });
+        idleTimer.start();
+    }
+
+    @Override
+    public void onUserInteraction()
+    {
+        if (idleTimer != null) {
+            idleTimer.touch();
+        }
     }
 
     @Override
