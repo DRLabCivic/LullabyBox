@@ -21,7 +21,7 @@
     <string name="title_activity_upload">UploadActivity</string>
     <string name="upload_title_text">Upload Lullaby</string>
     <string name="upload_body_text">Submitting lullaby...</string>
-    <string name="upload_body_text_finished">Lullaby got submitted.</string><
+    <string name="upload_body_text_finished">Lullaby got submitted.</string>
     <!-- Database Update Acvitiy -->
     <string name="title_activity_database_update">Lullaby Database Update</string>
     <string name="update_title_text">Updating Locations</string>
@@ -30,5 +30,6 @@
     <string name="update_body_text_2">Rebuilding Search Table...</string>
     <string name="update_body_text_finished">Database updated.</string>
     <string name="update_body_text_error">Error updating database. cities.sql is missing or has a wrong format</string>
+
 
 </resources>

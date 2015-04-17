@@ -1,0 +1,13 @@
+CREATE TABLE lullaby_recordings (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `file` varchar(255),
+  `city` varchar(250),
+  `country` varchar(250),
+  `longitude` DOUBLE,
+  `latitude` DOUBLE,
+  `population` int(11),
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

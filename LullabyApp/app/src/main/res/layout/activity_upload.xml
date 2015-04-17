@@ -26,7 +26,8 @@
             style="@style/progressBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/progressBar"/>
+            android:id="@+id/progressBar"
+            android:max="100"/>
 
 
     </LinearLayout>

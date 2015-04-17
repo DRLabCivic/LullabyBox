@@ -34,7 +34,7 @@ public class RecorderActivity extends FullscreenActivity {
 
         recorder = new SoundRecorderWav(getApplicationContext());
 
-        setIdleCloseTimer(15*1000); //15 seconds
+        setIdleCloseTimer(getResources().getInteger(R.integer.idleTime));
     }
 
     @Override
@@ -99,6 +99,8 @@ public class RecorderActivity extends FullscreenActivity {
         }
 
         state = RecorderState.RECORDING;
+
+        pauseIdleTimer(true);
     }
 
     public void stopRecording() {
@@ -124,6 +126,8 @@ public class RecorderActivity extends FullscreenActivity {
         recorder.stopRecording();
 
         state = RecorderState.STOPPED;
+
+        pauseIdleTimer(false);
     }
 
     public void resetRecording() {

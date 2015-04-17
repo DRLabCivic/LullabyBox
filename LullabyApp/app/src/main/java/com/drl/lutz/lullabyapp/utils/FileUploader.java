@@ -2,6 +2,7 @@ package com.drl.lutz.lullabyapp.utils;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.drl.lutz.lullabyapp.database.Location;
 import com.loopj.android.http.AsyncHttpClient;
@@ -35,9 +36,12 @@ public class FileUploader {
         try {
             params.put("file", this.file);
             params.put("location", this.location.toJsonString());
+            //params.put("location","test");
         } catch(FileNotFoundException e) {
             throw e;
         }
+
+        Log.d("HTTP", "params:" + this.location.toJsonString());
 
         httpClient.post(this.context,urlString,params,handler);
     }

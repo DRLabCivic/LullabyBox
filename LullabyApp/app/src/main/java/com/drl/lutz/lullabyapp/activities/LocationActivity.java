@@ -6,12 +6,15 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.KeyListener;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.drl.lutz.lullabyapp.R;
 import com.drl.lutz.lullabyapp.database.Location;
@@ -49,6 +52,8 @@ public class LocationActivity extends FullscreenActivity {
                 setLocation(location);
             }
         });
+
+        setIdleCloseTimer(getResources().getInteger(R.integer.idleTime));
 
     }
 

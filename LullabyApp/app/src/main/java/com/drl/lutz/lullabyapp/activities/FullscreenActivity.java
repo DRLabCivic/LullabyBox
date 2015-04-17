@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -39,6 +41,14 @@ abstract public class FullscreenActivity extends Activity {
 
         // never turn screen off
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (idleTimer != null)
+            idleTimer.stopTimer();
     }
 
     public void setImmersiveMode(boolean on) {
@@ -85,7 +95,7 @@ abstract public class FullscreenActivity extends Activity {
 
     //closes activity after beeing idle for too long
     public void setIdleCloseTimer(int idleTime) {
-        idleTimer=new IdleTimer(15*1000,new IdleTimer.IdleTimerEventListener() {
+        idleTimer=new IdleTimer(idleTime,new IdleTimer.IdleTimerEventListener() {
             @Override
             public void onIdleTooLong() {
                 //close activity
@@ -95,11 +105,17 @@ abstract public class FullscreenActivity extends Activity {
         idleTimer.start();
     }
 
+    public void pauseIdleTimer(boolean pause) {
+        if (pause)
+            this.idleTimer.pause();
+        else
+            this.idleTimer.unpause();
+    }
+
     @Override
-    public void onUserInteraction()
-    {
+    public void onUserInteraction() {
         if (idleTimer != null) {
-            idleTimer.touch();
+            idleTimer.reset();
         }
     }
 
@@ -129,7 +145,7 @@ abstract public class FullscreenActivity extends Activity {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Fuck it",
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Damn!",
             new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();

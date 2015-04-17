@@ -2,22 +2,77 @@
 
     require "config.php";
 
-    if (isset($_FILES['file'])) {
+    if (isset($_FILES['file']) && isset($_POST['location'])) {
 
         $file = $_FILES['file'];
+        $location = $_POST['location'];
 
-        //move file to records directory
-        $upload_dir = DIR_RECORDINGS;
-
-        if (is_uploaded_file($file['tmp_name'])) {
-            move_uploaded_file($file['tmp_name'], $upload_dir.'/'.$file['name']);
-            _saveToLog($file['name']." uploaded successfully.");
-            _sendData(array(),200);
+        //decode json
+        try {
+            $location = json_decode($location,true);
+        } catch (Exception $e) {
+            _sendData("Error parsing json",500);
         }
-        _sendData(array(),404);
+
+        //try to upload file
+        _uploadFile($file);
+            
+        //insert into database
+        _insertToDatabase($location,$file['name']);
+
+        _saveToLog($file['name']." uploaded successfully.");
+        _sendData(array(),200);
+
     } else {
-        _saveToLog("No file submited");
-        _sendData(array(),404);
+        _saveToLog("No file and location submited");
+        _sendData("No file and location submited",400);
+    }
+
+    function _uploadFile($file) {
+        //check if filetype is ok
+        _saveToLog($file['type']);
+        if (!($file['type'] == "audio/wav" || $file['type'] == "application/octet-stream"))
+            _sendData("File not allowed.",415);
+
+
+        if (!is_uploaded_file($file['tmp_name']))
+            _sendData("Error copying file to server",500);
+        
+        //move uploaded file
+        move_uploaded_file($file['tmp_name'], DIR_RECORDINGS.'/'.$file['name']);
+    }
+
+    function _insertToDatabase($location,$fileName) {
+        // get db connection
+        $db = _getDbConnection();
+
+        //insert
+        $stmt = $db->prepare("INSERT INTO ".DB_TABLE_RECORDINGS." 
+            (file,city,country,longitude,latitude,population)
+            VALUES (:file,:city,:country,:longitude,:latitude,:population)");
+
+        $insertData = array(
+            'file' => $fileName,
+            'city' => $location['city'],
+            'country' => $location['country'],
+            'longitude' => $location['longitude'],
+            'latitude' => $location['latitude'],
+            'population' => $location['population']
+        );
+        $stmt->execute($insertData);
+
+        //close db
+        $db = null;
+    }
+
+    function _getDbConnection() {
+        $dbhost=DB_SERVER;
+        $dbuser=DB_USER;
+        $dbpass=DB_PASSWORD;
+        $dbname=DB_DATABASE;
+        $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);  
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $dbh;
     }
     
     // Log data
@@ -56,10 +111,12 @@
     function _requestStatus($code) {
         $status = array(  
             200 => 'OK',
-            404 => 'Not Found',   
+            400 => 'Bad request',
+            404 => 'Not Found',
+            409 => 'Conflict',
+            415 => 'Unsupported Media Type',   
             405 => 'Method Not Allowed',
             500 => 'Internal Server Error',
         ); 
         return ($status[$code])?$status[$code]:$status[500]; 
     }
-?>

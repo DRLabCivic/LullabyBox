@@ -1,5 +1,6 @@
 package com.drl.lutz.lullabyapp.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.Cursor;
@@ -11,6 +12,8 @@ import android.text.Editable;
 import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -82,6 +85,8 @@ public class LocationAutoCompleteView extends AutoCompleteTextView {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count < before)
                     setLocation(null);
+                //tell the activity that there was a user interaction
+                ((Activity)getContext()).onUserInteraction();
             }
 
             @Override
@@ -108,9 +113,9 @@ public class LocationAutoCompleteView extends AutoCompleteTextView {
         }
     }
 
+
     public void setOnLocationSelectListener(OnLocationSelectListener listener) {
         this.listener = listener;
     }
-
 
 }

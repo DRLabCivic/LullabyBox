@@ -17,7 +17,7 @@ public class IdleTimer extends Thread {
     private static final String TAG= IdleTimer.class.getName();
     private long lastUsed;
     private long period;
-    private boolean stop;
+    private boolean stop,paused;
 
 
 
@@ -25,46 +25,56 @@ public class IdleTimer extends Thread {
     {
         this.period = period;
         this.listener = listener;
-        stop = false;
+        this.paused = false;
+        this.stop = false;
     }
 
     public void run()
     {
         long idle=0;
-        this.touch();
-        do
-        {
-            idle=System.currentTimeMillis()-lastUsed;
-            Log.d(TAG, "Application is idle for " + idle + " ms");
-            try
-            {
+
+        this.reset();
+
+        do {
+            //Log.d(TAG, "Application is idle for " + idle + " ms");
+            try {
                 Thread.sleep(2000); //check every 2 seconds
-            }
-            catch (InterruptedException e)
-            {
-                Log.d(TAG, "Waiter interrupted!");
+            } catch (InterruptedException e) {
+                //Log.d(TAG, "IdleThread interrupted!");
                 stop = true;
             }
-            if(idle > period)
-            {
+
+            idle=System.currentTimeMillis()-lastUsed;
+
+            if(!paused && idle > period) {
                 if (listener != null)
                     listener.onIdleTooLong();
-                idle=0;
                 stop = true;
             }
         }
         while(!stop);
-        Log.d(TAG, "Finishing Waiter thread");
+        //Log.d(TAG, "Finished IdleThread thread");
     }
 
-    public synchronized void touch()
+    public synchronized void reset()
     {
         lastUsed=System.currentTimeMillis();
     }
 
-    public synchronized void forceInterrupt()
+    public synchronized void stopTimer()
     {
         this.interrupt();
+    }
+
+    public synchronized void pause()
+    {
+        this.paused = true;
+    }
+
+    public synchronized void unpause()
+    {
+        this.reset();
+        this.paused = false;
     }
 
 }
