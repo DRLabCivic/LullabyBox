@@ -1,32 +1,6 @@
 <?php
 
-    require "config.php";
-
-    if (isset($_FILES['file']) && isset($_POST['location'])) {
-
-        $file = $_FILES['file'];
-        $location = $_POST['location'];
-
-        //decode json
-        try {
-            $location = json_decode($location,true);
-        } catch (Exception $e) {
-            _sendData("Error parsing json",500);
-        }
-
-        //try to upload file
-        _uploadFile($file);
-            
-        //insert into database
-        _insertToDatabase($location,$file['name']);
-
-        _saveToLog($file['name']." uploaded successfully.");
-        _sendData(array(),200);
-
-    } else {
-        _saveToLog("No file and location submited");
-        _sendData("No file and location submited",400);
-    }
+    require_once "config.php";
 
     function _uploadFile($file) {
         //check if filetype is ok
@@ -83,7 +57,7 @@
         file_put_contents($file, $current);
     }
 
-    function _sendData($data = array(), $status = 200, $onlyFirst = false) {
+    function _sendData($data = array(), $status = 200) {
         // headers for not caching the results
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
@@ -99,10 +73,7 @@
         header("HTTP/1.1 " . $status . " " . _requestStatus($status));
 
         // send the result now
-        if ($onlyFirst && !empty($data))
-            echo json_encode($data[0]);
-        else
-            echo json_encode($data);
+        echo json_encode($data);
 
         //end script
         exit(); 

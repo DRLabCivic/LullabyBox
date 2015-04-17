@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="idleTime">60000</integer>
-    <string name="UploadWebUrl">http://sahabe.mooo.com/lullaby/submit.php</string>
+    <string name="UploadWebUrl">http://sahabe.mooo.com/lullaby/api.php</string>
 </resources>

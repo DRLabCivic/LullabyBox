@@ -85,6 +85,9 @@ public class LocationAutoCompleteView extends AutoCompleteTextView {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count < before)
                     setLocation(null);
+                showDropDown();
+
+
                 //tell the activity that there was a user interaction
                 ((Activity)getContext()).onUserInteraction();
             }
