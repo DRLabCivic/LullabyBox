@@ -29,6 +29,7 @@ import com.drl.lutz.lullabyapp.database.LocationDatabase;
  */
 public class LocationAutoCompleteView extends AutoCompleteTextView {
 
+
     public interface OnLocationSelectListener {
         public void onSelected(boolean selected, Location location);
     }
@@ -36,6 +37,8 @@ public class LocationAutoCompleteView extends AutoCompleteTextView {
     private OnLocationSelectListener listener = null;
 
     private Location location = null;
+
+    View loadingIndidicatorView;
 
     public LocationAutoCompleteView(Context context) {
         super(context);
@@ -97,6 +100,21 @@ public class LocationAutoCompleteView extends AutoCompleteTextView {
 
             }
         });
+
+        loadingIndidicatorView = null;
+
+    }
+
+    @Override
+    public void onFilterComplete(int count) {
+        super.onFilterComplete(count);
+        loadingIndidicatorView.setVisibility(INVISIBLE);
+    }
+
+    @Override
+    public void performFiltering(CharSequence text, int keyCode) {
+        super.performFiltering(text, keyCode);
+        loadingIndidicatorView.setVisibility(VISIBLE);
     }
 
     public void setLocation(Location loc) {
@@ -119,6 +137,11 @@ public class LocationAutoCompleteView extends AutoCompleteTextView {
 
     public void setOnLocationSelectListener(OnLocationSelectListener listener) {
         this.listener = listener;
+    }
+
+    public void setLoadingIndicator(View loadingIndidicatorView) {
+        this.loadingIndidicatorView = loadingIndidicatorView;
+        this.loadingIndidicatorView.setVisibility(INVISIBLE);
     }
 
 }

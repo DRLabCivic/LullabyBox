@@ -53,6 +53,8 @@ public class LocationActivity extends FullscreenActivity {
             }
         });
 
+        searchInput.setLoadingIndicator(findViewById(R.id.searchSpinner));
+
         setIdleCloseTimer(getResources().getInteger(R.integer.idleTime));
 
     }

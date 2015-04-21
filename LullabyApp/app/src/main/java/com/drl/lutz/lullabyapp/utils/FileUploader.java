@@ -46,4 +46,8 @@ public class FileUploader {
         httpClient.post(this.context,urlString,params,handler);
     }
 
+    public void deleteFile() {
+        this.file.delete();
+    }
+
 }

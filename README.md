@@ -38,3 +38,8 @@ on arch linux its placed in */etc/php/php.ini*
 ### nginx config
 
 add ```client_max_body_size 40M;``` to  */etc/nginx/nginx.conf* inside the server {} block.
+
+## TODO
+
+* fix special asci characters in location string
+* fix that a soundfile for each recording is created, instead only use temp file

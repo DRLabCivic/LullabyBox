@@ -41,11 +41,13 @@
                 android:hint="@string/searchFieldHint"
                 android:singleLine="true"/>
 
-            <!--<ProgressBar
+            <ProgressBar
                 style="@style/spinner"
-                android:id="@+id/seachSpinner"
+                android:id="@+id/searchSpinner"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />-->
+                android:layout_alignParentEnd="true"
+                android:visibility="invisible"
+                android:layout_margin="20dp"/>
 
 
         </RelativeLayout>

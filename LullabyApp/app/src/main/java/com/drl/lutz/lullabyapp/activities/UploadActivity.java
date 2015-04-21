@@ -49,7 +49,7 @@ public class UploadActivity extends FullscreenActivity {
 
     public void uploadLullaby(File soundFile,Location location) {
 
-        FileUploader uploader = new FileUploader(getApplicationContext(),soundFile,location);
+        final FileUploader uploader = new FileUploader(getApplicationContext(),soundFile,location);
 
         String uploadUrl = getResources().getString(R.string.UploadWebUrl);
 
@@ -63,6 +63,9 @@ public class UploadActivity extends FullscreenActivity {
                     findViewById(R.id.doneButton).setEnabled(true);
                     progressBar.setProgress(100);
                     pauseIdleTimer(false);
+
+                    //delete file after succesfull upload
+                    uploader.deleteFile();
                 }
 
                 @Override
