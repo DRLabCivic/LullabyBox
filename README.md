@@ -38,6 +38,18 @@ on arch linux its placed in */etc/php/php.ini*
 
 add `client_max_body_size 40M;` to  */etc/nginx/nginx.conf* inside the server {} block.
 
+## Create map tiles
+
+1. First create map with TileMill and export to .mbtiles
+2. Install mbutil from <https://github.com/mapbox/mbutil>
+    * `sudo easy_install mbutil`
+
+Example: export xx.mbtiles into mapTiles/ with 
+
+``` 
+mb-util xxx.mbtiles map_tiles --image_format=png
+```
+
 ## TODO
 
 ### App

@@ -21,7 +21,7 @@
         //close db
         $db = null;
 
-        _sendData($result,200);
+        _sendData(array("recordings" => $result),200);
     }
 
     function submitFile() {
