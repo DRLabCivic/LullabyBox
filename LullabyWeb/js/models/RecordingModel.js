@@ -9,7 +9,16 @@ define([
 		defaults: {
 			id: -1,
 			longitude: 0,
-			latitude: 0
+			latitude: 0,
+			filepath: ''
+		},
+		
+		set: function(attributes, options) {
+		
+		    if (attributes.file !== undefined)
+		    	attributes.filepath = Constants['web_data_folder']+attributes.file;
+		    
+		    return Backbone.Model.prototype.set.call(this, attributes, options);
 		},
 		
 		toGeoJSON: function() {

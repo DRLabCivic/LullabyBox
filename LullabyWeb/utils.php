@@ -44,9 +44,14 @@
         $dbuser=DB_USER;
         $dbpass=DB_PASSWORD;
         $dbname=DB_DATABASE;
-        $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);  
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $dbh;
+        
+        try {
+	        $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);  
+	        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	        return $dbh;
+        } catch (Exception $e) {
+        	echo "Could not connect to database.";
+        }
     }
     
     // Log data

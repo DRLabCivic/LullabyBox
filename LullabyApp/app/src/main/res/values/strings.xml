@@ -14,7 +14,7 @@
     <!-- Location Acvitiy -->
     <string name="title_activity_location">LocationActivity</string>
     <string name="title_text_location">Where did you learn it?</string>
-    <string name="help_text_location">Tell us the place where you learned your lullaby. (English names only)</string>
+    <string name="help_text_location">Tell us the place where you learned your lullaby.</string>
     <string name="help_text_location_choose">Choose a location from the drop down menu to continue.</string>
     <string name="searchFieldHint">Type in the closest city</string>
     <!-- Upload Activity -->

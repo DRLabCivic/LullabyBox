@@ -12,6 +12,8 @@ import com.drl.lutz.lullabyapp.R;
 import com.drl.lutz.lullabyapp.database.Location;
 import com.drl.lutz.lullabyapp.database.LocationDatabase;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by lutz on 12/04/15.
  */

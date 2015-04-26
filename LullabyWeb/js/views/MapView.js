@@ -9,17 +9,17 @@ define([
 		
 		initialize: function(options) {
 			
-			//register collection events
-			this.model = options.model;this.collection = options.collection;
-			this.collection.on('add', this.addFeature, this);
-			this.collection.on('reset', this.onCollectionSync,this);
-			
-			//create marker object so collection can add to
+			//create marker object that the collection can add to
 			this.markers = new L.MarkerClusterGroup({
 				maxClusterRadius : 25,
 				showCoverageOnHover: false,
 				spiderfyOnMaxZoom: true
 			});
+			
+			//register collection events
+			this.model = options.model;this.collection = options.collection;
+			this.collection.on('add', this.addFeature, this);
+			this.collection.on('reset', this.onCollectionSync,this);
 			
 		},
 		
@@ -47,6 +47,18 @@ define([
 			
 			this.markers.addTo(this.map);
 			
+			edgeMarker = L.edgeMarker( {
+				layerGroup: this.markers,
+				icon : L.icon({ // style markers
+					iconUrl : 'images/edge_arrow.png',
+					clickable: true,
+					iconSize: [48,48],
+					iconAnchor: [24, 24]
+				})
+			});
+			
+			edgeMarker.addTo(this.map);
+			
 		},
 		
 
@@ -57,9 +69,37 @@ define([
 		addFeature: function(model) {
 			var geoJson = model.toGeoJSON();
 			if (geoJson) {
-				var layer = L.geoJson(geoJson,this.geoLayerOptions);
+				var layer = L.geoJson(geoJson,this.getMarkerLayerOptions());
 				this.markers.addLayer(layer);
 			}
+		},
+		
+		getMarkerLayerOptions: function() {
+			var self = this;
+			return {
+				/*pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon : L.Icon({ // style markers
+						iconUrl : 'images/marker-icon.png',
+						clickable: true,
+						className: feature.properties.className,
+						id: feature.properties.idName
+					})});
+				},*/
+				onEachFeature: function(feature, layer) { // connect to event
+					if (feature.properties.type == 'marker')
+						layer.on("click", function() {
+							self.onMarkerClick(this,feature);
+						});
+				}
+			};
+		},
+		
+		onMarkerClick: function(clickevent) {
+			var recording = this.collection.get(clickevent.feature.properties.id);
+			console.log(recording);
+			this.trigger('show:recordingPopup',recording);
+			
+			//this.focusMarker([result]);
 		},
 		
 	});

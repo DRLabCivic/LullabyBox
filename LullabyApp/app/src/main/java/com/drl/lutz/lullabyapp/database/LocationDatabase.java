@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import java.io.UnsupportedEncodingException;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
@@ -31,7 +33,7 @@ public class LocationDatabase extends SQLiteOpenHelper {
     }
 
     private LocationDatabase(Context context) {
-        super(context, DATABASE_NAME , null, 8);
+        super(context, DATABASE_NAME , null, 10);
         this.context = context;
     }
 
@@ -41,12 +43,14 @@ public class LocationDatabase extends SQLiteOpenHelper {
         //create primary table
         db.execSQL(
             "CREATE TABLE "+CITIES_TABLE_NAME +
-            "(_id INTEGER PRIMARY KEY, " +
+            "(" +
+            "_id INTEGER PRIMARY KEY, " +
             "city VARCHAR(255), "+
             "country VARCHAR(3), "+
             "population INTEGER, "+
             "longitude NUMERIC, "+
-            "latitude NUMERIC)"
+            "latitude NUMERIC"+
+            ")"
         );
 
         buildSearchTable(db);
@@ -90,7 +94,8 @@ public class LocationDatabase extends SQLiteOpenHelper {
                     escape(location.country)+"," +
                     escape(Integer.toString(location.population))+"," +
                     escape(Double.toString(location.longitude))+"," +
-                    escape(Double.toString(location.latitude))+"),";
+                    escape(Double.toString(location.latitude)) +
+                    "),";
         }
 
         //delete last comma
@@ -119,6 +124,14 @@ public class LocationDatabase extends SQLiteOpenHelper {
     public synchronized Cursor searchCity (String prefix) {
         SQLiteDatabase db = this.getReadableDatabase();
 
+        //convert to utf8
+        /*try {
+            byte[] utf16 = prefix.getBytes("UTF-8");
+            prefix = new String(utf16,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            //do nothing;
+        }*/
+
         //Cursor cursor = db.rawQuery("SELECT * FROM "+CITIES_TABLE_NAME_FTS,null);
         Cursor cursor = db.rawQuery(
                 "SELECT data.* FROM "+CITIES_TABLE_NAME_FTS+" AS fts " +
@@ -140,8 +153,13 @@ public class LocationDatabase extends SQLiteOpenHelper {
 
     static public String escape(String str) {
         str = Normalizer.normalize(str, Normalizer.Form.NFD);
-        str = str.replaceAll("[^\\x00-\\x7F]", ""); //only allow asci characters
         return DatabaseUtils.sqlEscapeString(str);
     }
+
+    /*static public String escapeAsci(String str) {
+        str = Normalizer.normalize(str, Normalizer.Form.NFD);
+        str = str.replaceAll("[^\\x00-\\x7F]", ""); //only allow asci characters
+        return DatabaseUtils.sqlEscapeString(str);
+    }*/
 
 }

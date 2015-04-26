@@ -8,10 +8,13 @@ import android.util.Log;
 import com.drl.lutz.lullabyapp.database.Location;
 import com.drl.lutz.lullabyapp.database.LocationDatabase;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -44,13 +47,15 @@ public class DatabaseImporter {
         long bytesRead = 0;
 
         //Read text from file
-        BufferedReader br = new BufferedReader(new FileReader(file));
+        InputStreamReader inputStream = new InputStreamReader(new BufferedInputStream(new FileInputStream(file)),"UTF-8");
+        BufferedReader reader = new BufferedReader(inputStream);
+        //BufferedReader br = new BufferedReader(new FileReader(file));
 
         if (listener != null)
             listener.onProgress(0.0F);
 
         //skip first line
-        br.readLine();
+        reader.readLine();
 
         ArrayList<Location> locations = new ArrayList<Location>();
 
@@ -58,7 +63,7 @@ public class DatabaseImporter {
         SQLiteDatabase sqlDb = db.getWritableDatabase();
 
         String line;
-        while ((line = br.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
 
             bytesRead += line.length(); //approximately 1 byte per utf character
 

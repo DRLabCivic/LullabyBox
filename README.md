@@ -1,6 +1,10 @@
 LullabyBox
 ==========
 
+## Installation
+
+After pulling the repository: modify *config_default.php* to point to your sql server and rename it to *config.php*!
+
 ## Location Database
 
 Reads database file from *cities.sql* in the externalStorageDirectory (usualy /sdcard/ or /mnt/sdcard)
@@ -40,7 +44,7 @@ add `client_max_body_size 40M;` to  */etc/nginx/nginx.conf* inside the server {}
 
 ## Create map tiles
 
-1. First create map with TileMill and export to .mbtiles
+1. First create map with TileMill and export to .mbtiles. Download: <https://www.mapbox.com/tilemill/>
 2. Install mbutil from <https://github.com/mapbox/mbutil>
     * `sudo easy_install mbutil`
 

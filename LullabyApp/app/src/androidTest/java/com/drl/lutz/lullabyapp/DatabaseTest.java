@@ -6,6 +6,7 @@ import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 import android.util.Log;
 
+import com.drl.lutz.lullabyapp.database.DatabaseImporter;
 import com.drl.lutz.lullabyapp.database.Location;
 import com.drl.lutz.lullabyapp.database.LocationDatabase;
 
@@ -31,6 +32,7 @@ public class DatabaseTest extends AndroidTestCase {
         locations.add(new Location(0,"Gothenburg","se",600000,56.32,32.43));
         locations.add(new Location(0,"Beelitz","de",20000,52.32,12.43));
         locations.add(new Location(0,"Götebörgé §'.,-213'é","de",40000,52.32,12.43));
+        locations.add(new Location(0,"Borås","de",40000,52.32,12.43));
         db.insertLocations(db.getWritableDatabase(), locations);
         db.buildSearchTable(db.getWritableDatabase());
 
@@ -76,7 +78,7 @@ public class DatabaseTest extends AndroidTestCase {
         cursor.close();
     }
 
-    /*public void testImport(){
+    public void testImport(){
 
         DatabaseImporter importer = new DatabaseImporter(db);
 
@@ -88,19 +90,25 @@ public class DatabaseTest extends AndroidTestCase {
             assertTrue("Error importing file: " + e.toString(), false);
             e.printStackTrace();
         }
-
         assertTrue("Db size should be greater after import",rowsBefore<db.numberOfRows());
-    }*/
+
+        Cursor cursor = db.searchCity("Boråstäst");
+        Log.d("TEST IMPORT", DatabaseUtils.dumpCursorToString(cursor));
+
+        assertTrue("searching pattern 'Boråstäst': Column count should be 1",cursor.getCount() == 1);
+
+
+    }
 
     public void testSpecialCharacters(){
 
-        Cursor cursor = db.searchCity("Götebö");
+        Cursor cursor = db.searchCity("Götebörgé");
         //Cursor cursor = db.getAllLocations();
 
         cursor.moveToFirst();
         Log.d("TEST", DatabaseUtils.dumpCursorToString(cursor));
 
-        assertTrue("Inserting special character string and searching pattern 'Goteborge': Column count should be 1",cursor.getCount() == 1);
+        assertTrue("Inserting special character string and searching pattern 'Borås': Column count should be 1",cursor.getCount() == 1);
     }
 
     @Override

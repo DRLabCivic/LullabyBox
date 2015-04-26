@@ -4,26 +4,24 @@ body {
 	font-size: 12px;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-touch-callout: none;
+	color:#ffffff;
 }
 
 #container {
 	height:100%;
 }
 
-.noscroll {
-	position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-	overflow:hidden;
-}
+/*
+ * TEXT STYLES
+ */
 
 h2 {
-	font-size: 130%;
+	font-size: 240%;
 	padding:0px;
 	margin:0px;
-	line-height:normal
+	line-height:normal;
+	font-weight:200;
+	margin-bottom:20px;
 }
 
 h3 {
@@ -42,4 +40,67 @@ h3 {
 	height:100%;
 	z-index:1;
 	background-color: #fff;
+}
+
+/*
+ * RECORDING POPUP
+ */
+ 
+ #recording {
+	position:fixed;
+	top:30%;
+	z-index: 1000;
+	overflow: auto;
+	padding:20px;
+	background-color:#f3fffe;
+	border-radius:2px;
+	color:#000000;
+	margin-left:0px auto;
+	margin-right:0px auto;
+}
+
+.recording-item {
+	height:100%;
+}
+ 
+/*
+ * MODAL DIALOG
+ */
+
+.modal-dialog {
+	/*-webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);*/
+    webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1
+}
+
+.modal-dialog.transition {
+	-webkit-transition-duration: .3s;
+    transition-duration: .3s;
+}
+
+.modal-dialog.hidden {
+	/*-webkit-transform: translate3d(0%, -20%, 0);
+    transform: translate3d(0, -20%, 0);*/
+  	webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: 0
+}
+
+/*
+ * HELPERS
+ */
+ 
+.middle-parent {
+	display: table;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.center {
+	text-align:center;
 }
