@@ -42,25 +42,64 @@ h3 {
 	background-color: #fff;
 }
 
+.marker {
+	background-color:#e0d1b3;
+	border-radius:50%;
+	width:50%;
+	height:50%;
+	-webkit-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
+	box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
+	border: 1px solid #666;
+	text-align:center;
+	color:#000;
+	vertical-align: middle; 
+	line-height:36px;
+}
+
+.marker.cluster {
+	background-color:#cc603e;
+	border: none;
+}
+
 /*
  * RECORDING POPUP
  */
  
- #recording {
-	position:fixed;
-	top:30%;
+#recording {
+	display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
 	z-index: 1000;
-	overflow: auto;
-	padding:20px;
-	background-color:#f3fffe;
-	border-radius:2px;
-	color:#000000;
-	margin-left:0px auto;
-	margin-right:0px auto;
 }
 
 .recording-item {
-	height:100%;
+	display:table-cell;
+	vertical-align: middle;
+}
+
+.center-item {
+	display:table;
+	text-align:center;
+	background-image: url("../images/fg.png");
+	background-color:#f3fffe;
+	color:#000000;
+	padding:20px;
+	border-radius:50%;
+	width:400px;
+	height:400px;
+	margin-right: auto;
+	margin-left: auto;
+	-webkit-box-shadow: 4px 6px 52px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 4px 6px 52px 0px rgba(0,0,0,0.75);
+	box-shadow: 4px 6px 52px 0px rgba(0,0,0,0.75);
+}
+
+.centered-text {
+	margin-top: -100px;
+	display:table-cell;
+	vertical-align: middle;
 }
  
 /*

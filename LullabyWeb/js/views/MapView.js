@@ -13,7 +13,16 @@ define([
 			this.markers = new L.MarkerClusterGroup({
 				maxClusterRadius : 25,
 				showCoverageOnHover: false,
-				spiderfyOnMaxZoom: true
+				spiderfyOnMaxZoom: true,
+				spiderfyDistanceMultiplier: 2,
+				iconCreateFunction: function(cluster) {
+			        return new L.divIcon({ 
+			        	html: cluster.getChildCount(),
+			        	className: 'marker cluster',
+			        	iconSize: [36,36],
+						iconAnchor: [18, 18]
+			        });
+			    }
 			});
 			
 			//register collection events
@@ -47,10 +56,10 @@ define([
 			
 			this.markers.addTo(this.map);
 			
-			edgeMarker = L.edgeMarker( {
+			edgeMarker = L.edgeMarker({
 				layerGroup: this.markers,
 				icon : L.icon({ // style markers
-					iconUrl : 'images/edge_arrow.png',
+					iconUrl : 'images/edge_arrow_brown.png',
 					clickable: true,
 					iconSize: [48,48],
 					iconAnchor: [24, 24]
@@ -77,14 +86,16 @@ define([
 		getMarkerLayerOptions: function() {
 			var self = this;
 			return {
-				/*pointToLayer: function (feature, latlng) {
-					return L.marker(latlng, {icon : L.Icon({ // style markers
-						iconUrl : 'images/marker-icon.png',
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {icon : L.divIcon({ // style markers
+						iconSize: [36,36],
+						iconAnchor: [18, 18],
 						clickable: true,
-						className: feature.properties.className,
-						id: feature.properties.idName
+						className: 'marker',
+						id: feature.properties.idName,
+						html: '-_-',
 					})});
-				},*/
+				},
 				onEachFeature: function(feature, layer) { // connect to event
 					if (feature.properties.type == 'marker')
 						layer.on("click", function() {
@@ -96,11 +107,10 @@ define([
 		
 		onMarkerClick: function(clickevent) {
 			var recording = this.collection.get(clickevent.feature.properties.id);
-			console.log(recording);
 			this.trigger('show:recordingPopup',recording);
-			
-			//this.focusMarker([result]);
-		},
+			this.map.panTo([recording.get('latitude'),recording.get('longitude')]);
+		}
+		
 		
 	});
 	// Our module now returns our view
