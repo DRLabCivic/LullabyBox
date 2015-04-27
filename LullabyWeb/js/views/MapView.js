@@ -5,22 +5,24 @@ define([
 	'text!templates/mapTemplate.html'
 ], function($, _, Marionette, template){
 	
+	var MARKER_SIZE = 62;
+	
 	var MapView = Backbone.Marionette.ItemView.extend({
 		
 		initialize: function(options) {
 			
 			//create marker object that the collection can add to
 			this.markers = new L.MarkerClusterGroup({
-				maxClusterRadius : 25,
+				maxClusterRadius : MARKER_SIZE*1.1,
 				showCoverageOnHover: false,
 				spiderfyOnMaxZoom: true,
-				spiderfyDistanceMultiplier: 2,
+				spiderfyDistanceMultiplier: 2.5,
 				iconCreateFunction: function(cluster) {
 			        return new L.divIcon({ 
 			        	html: cluster.getChildCount(),
 			        	className: 'marker cluster',
-			        	iconSize: [36,36],
-						iconAnchor: [18, 18]
+			        	iconSize: [MARKER_SIZE,MARKER_SIZE],
+						iconAnchor: [MARKER_SIZE/2, MARKER_SIZE/2]
 			        });
 			    }
 			});
@@ -40,7 +42,7 @@ define([
 		onShow: function() {
 			this.map = L.map(this.$('#map')[0], {
 				center: [ 52,16],
-				maxZoom: 5,
+				maxZoom: 6,
 				minZoom: 5,
 				zoom: 5,
 				zoomControl: false
@@ -61,15 +63,14 @@ define([
 				icon : L.icon({ // style markers
 					iconUrl : 'images/edge_arrow_brown.png',
 					clickable: true,
-					iconSize: [48,48],
-					iconAnchor: [24, 24]
+					iconSize: [MARKER_SIZE,MARKER_SIZE],
+					iconAnchor: [MARKER_SIZE/2, MARKER_SIZE/2]
 				})
 			});
 			
 			edgeMarker.addTo(this.map);
 			
 		},
-		
 
 		onCollectionSync: function() {
 			this.collection.each(this.addFeature,this);
@@ -88,8 +89,8 @@ define([
 			return {
 				pointToLayer: function (feature, latlng) {
 					return L.marker(latlng, {icon : L.divIcon({ // style markers
-						iconSize: [36,36],
-						iconAnchor: [18, 18],
+						iconSize: [MARKER_SIZE,MARKER_SIZE],
+						iconAnchor: [MARKER_SIZE/2, MARKER_SIZE/2],
 						clickable: true,
 						className: 'marker',
 						id: feature.properties.idName,

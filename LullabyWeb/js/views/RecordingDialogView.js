@@ -7,6 +7,9 @@ define([
 	
 	var RecordingDialogView = Backbone.Marionette.ItemView.extend({
 		
+		_spinner: new Spinner(),
+		_audioPlayer: null,
+		
 		id: 'recording',
 			
 		template: _.template(template),
@@ -14,7 +17,8 @@ define([
 		className: 'modal-dialog hidden transition',
 		
 		events: {
-			'click .recording-item' : 'onCloseButtonPressed'
+			'click .recording-item' : 'onCloseButtonPressed',
+			'click .center-item' : 'onCenterItemPressed'
 		},
 		
 		onRender: function() {
@@ -28,12 +32,19 @@ define([
 				self.$el.off('webkitTransitionEnd transitionend');
 			});
 			
-			//register audioplayer events
-			var audioplayer = this.$('#audioplayer');
-			//audioplayer[0].play();
-			audioplayer.on('canplaythrough', {self: this}, this.onLoadedAudioFile);
-			audioplayer.on('loadstart', {self: this}, this.onLoadingAudioFile);
+			//setup audioplayer
+			this._audioPlayer = this.$('#audioplayer')[0];
+			
+			// register player events
+			this.$('#audioplayer').on('canplaythrough', {self: this}, this.onLoadedAudioFile);
+			this.$('#audioplayer').on('loadstart', {self: this}, this.onLoadingAudioFile);
 			this.$('#wavsrc').on('error', {self: this}, this.onAudioFileError);
+		},
+		
+		onBeforeDestroy: function() {
+			if (this._audioPlayer != null)
+				this._audioPlayer.pause();
+				this._audioPlayer.setAttribute('src',null);
 		},
 		
 		onCloseButtonPressed: function() {
@@ -43,10 +54,9 @@ define([
 		onLoadedAudioFile: function(event) {
 			var self = event.data.self;
 			
-			var audioplayer = event.target;
-			audioplayer.play();
+			self._audioPlayer.play();
 			
-			self.spinner.stop();
+			self._spinner.stop();
 			self.$('.centered-text').show();
 		},
 		
@@ -56,7 +66,7 @@ define([
 			self.$('.centered-text').hide();
 			
 			var target = self.$('#spinner')[0]
-			self.spinner = new Spinner().spin(target);
+			self._spinner.spin(target);
 		},
 		
 		onAudioFileError: function(event) {
@@ -65,7 +75,16 @@ define([
 			self.$('.centered-text').html("<h2>:(</h2>");
 			self.$('.centered-text').show();
 			
-			self.spinner.stop();
+			self._spinner.stop();
+		},
+		
+		onCenterItemPressed: function() {
+			console.log('pressed');
+			if (this._audioPlayer.paused)
+				this._audioPlayer.play();
+			else
+				this._audioPlayer.pause();
+			return false;
 		}
 
 	});

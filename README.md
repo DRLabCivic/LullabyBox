@@ -20,6 +20,8 @@ Aixirivali, Andorra	0	ad	06	42.4666667	1.5
 
 All values are tab seperated.
 
+**Important:** Take care that the sql file is saved with utf-8 encoding.
+
 ## Webserver Settings
 
 ### php config
@@ -58,8 +60,10 @@ mb-util xxx.mbtiles map_tiles --image_format=png
 
 ### App
 
-* [ ] fix special asci characters in location string
-* [x] fix that a soundfile for each recording is created, instead only use temp file
+* [x] fix special asci characters in location string
+* [x] fix that a soundfile for each recording is created, instead only use 
+temp file
+    * now the audiofile gets deleted after succesfull upload.
 * [ ] restrict maximal length of soundfile
 * [ ] Make it look nicer
 

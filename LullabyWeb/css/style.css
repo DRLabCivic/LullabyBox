@@ -54,7 +54,8 @@ h3 {
 	text-align:center;
 	color:#000;
 	vertical-align: middle; 
-	line-height:36px;
+	line-height: 62px;
+	font-weight: bold;
 }
 
 .marker.cluster {
