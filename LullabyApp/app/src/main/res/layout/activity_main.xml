@@ -12,7 +12,7 @@
         style="@style/topLayout"
         android:orientation="vertical">
 
-        <TextView
+        <com.drl.lutz.lullabyapp.views.TitleTextView
             android:text="@string/title_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

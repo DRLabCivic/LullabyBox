@@ -72,7 +72,7 @@ public class RecorderActivity extends FullscreenActivity {
         final Animation flashAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flash);
         recordIcon.startAnimation(flashAnimation);
 
-        //start Counting Time
+        //start Counting Time, set maximum time
         timer = new CountDownTimer(1000 * 600, 10) {
 
             long startTime = System.currentTimeMillis();
@@ -148,6 +148,7 @@ public class RecorderActivity extends FullscreenActivity {
 
         recorder.reset();
         state = RecorderState.INIT;
+
     }
 
     public File saveRecording() throws Exception {
@@ -172,7 +173,8 @@ public class RecorderActivity extends FullscreenActivity {
 
         //String minsString = Long.toString(mins);
 
-        return(secString+"."+hsecString);
+        //return(secString+"."+hsecString);
+        return(secString);
     }
 
     public void onRestartButtonClicked(View view) {

@@ -37,7 +37,7 @@ abstract public class FullscreenActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         //hide all system elements
-        setImmersiveMode(false);
+        setImmersiveMode(true);
 
         // never turn screen off
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

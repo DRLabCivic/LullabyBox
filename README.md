@@ -64,7 +64,12 @@ mb-util xxx.mbtiles map_tiles --image_format=png
 * [x] fix that a soundfile for each recording is created, instead only use 
 temp file
     * now the audiofile gets deleted after succesfull upload.
-* [ ] restrict maximal length of soundfile
+* [ ] restrict maximal length of soundfile to 300 seconds
 * [ ] Make it look nicer
+* [x] Change font 
 
 ### Web
+
+* [ ] Make it look nicer, maybe moons?
+* [ ] Find new font?
+* [ ] delte sound files

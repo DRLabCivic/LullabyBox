@@ -43,14 +43,14 @@ h3 {
 }
 
 .marker {
-	background-color:#e0d1b3;
+	/*background-color:#e0d1b3;*/
 	border-radius:50%;
 	width:50%;
 	height:50%;
 	-webkit-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
 	-moz-box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
 	box-shadow: 3px 3px 5px -1px rgba(0,0,0,0.75);
-	border: 1px solid #666;
+	/*border: 1px solid #666;*/
 	text-align:center;
 	color:#000;
 	vertical-align: middle; 
@@ -59,8 +59,9 @@ h3 {
 }
 
 .marker.cluster {
-	background-color:#cc603e;
+	background-image: url('../images/moon_icon_cluster.png');
 	border: none;
+	background-size: 100% 100%;
 }
 
 /*

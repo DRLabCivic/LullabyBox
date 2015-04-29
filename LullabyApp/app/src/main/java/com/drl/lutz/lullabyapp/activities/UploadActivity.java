@@ -65,7 +65,7 @@ public class UploadActivity extends FullscreenActivity {
                     pauseIdleTimer(false);
 
                     //delete file after succesfull upload
-                    uploader.deleteFile();
+                    //uploader.deleteFile();
                 }
 
                 @Override

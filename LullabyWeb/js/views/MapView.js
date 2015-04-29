@@ -18,7 +18,7 @@ define([
 				spiderfyOnMaxZoom: true,
 				spiderfyDistanceMultiplier: 2.5,
 				iconCreateFunction: function(cluster) {
-			        return new L.divIcon({ 
+			        return new L.divIcon({
 			        	html: cluster.getChildCount(),
 			        	className: 'marker cluster',
 			        	iconSize: [MARKER_SIZE,MARKER_SIZE],
@@ -41,7 +41,7 @@ define([
 		
 		onShow: function() {
 			this.map = L.map(this.$('#map')[0], {
-				center: [ 52,16],
+				center: [ 44,22],
 				maxZoom: 6,
 				minZoom: 5,
 				zoom: 5,
@@ -88,13 +88,13 @@ define([
 			var self = this;
 			return {
 				pointToLayer: function (feature, latlng) {
-					return L.marker(latlng, {icon : L.divIcon({ // style markers
+					return L.marker(latlng, {icon : L.icon({ // style markers
+						iconUrl : 'images/moon_icon.png',
 						iconSize: [MARKER_SIZE,MARKER_SIZE],
 						iconAnchor: [MARKER_SIZE/2, MARKER_SIZE/2],
 						clickable: true,
 						className: 'marker',
 						id: feature.properties.idName,
-						html: '-_-',
 					})});
 				},
 				onEachFeature: function(feature, layer) { // connect to event

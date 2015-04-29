@@ -6,7 +6,7 @@
         </shape>
     </item>
     <item>
-        <bitmap android:src="@drawable/ic_mic_white">
+        <bitmap android:src="@drawable/ic_mic_black">
         </bitmap>
     </item>
 </layer-list>

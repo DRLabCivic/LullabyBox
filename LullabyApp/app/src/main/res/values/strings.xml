@@ -3,25 +3,25 @@
 
     <string name="app_name">LullabyApp</string>
     <!-- Main Acvitiy -->
-    <string name="title_text">Lullaby App</string>
-    <string name="briefing_text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</string>
+    <string name="title_text">Lullaby Box</string>
+    <string name="briefing_text">Sing and record your favorite lullaby – one you remember best. The Lullaby Box allows you to record and allocate it to the region you originate from. First you record the lullaby, then you can assign the audio recording to the place were you grew up. The recordings are anonymous. \n\nThe collection appears on a map that provides \nan overview regarding the origins of the participants. The recordings can be listened to outside on the screen.</string>
     <!-- Recorder Acvitiy -->
     <string name="title_activity_recorder">RecorderActivity</string>
-    <string name="recordTimeStart">000.0</string>
+    <string name="recordTimeStart">000</string>
     <string name="recordHelpTextStart">Tap screen to start recording.</string>
     <string name="recordHelpTextStop">Recording now. Tap again to stop.</string>
     <string name="recordHelpTextFinished">Recording finished.</string>
     <!-- Location Acvitiy -->
     <string name="title_activity_location">LocationActivity</string>
-    <string name="title_text_location">Where did you learn it?</string>
-    <string name="help_text_location">Tell us the place where you learned your lullaby.</string>
+    <string name="title_text_location">Your cradle?</string>
+    <string name="help_text_location">Where did you grow up? Tell us the place where you spent your very first years – your cradle. The app will give you suggestions once you typed in the first letters of the place.</string>
     <string name="help_text_location_choose">Choose a location from the drop down menu to continue.</string>
     <string name="searchFieldHint">Type in the closest city</string>
     <!-- Upload Activity -->
     <string name="title_activity_upload">UploadActivity</string>
     <string name="upload_title_text">Upload Lullaby</string>
     <string name="upload_body_text">Submitting lullaby...</string>
-    <string name="upload_body_text_finished">Lullaby got submitted.</string>
+    <string name="upload_body_text_finished">Lullaby got submitted. You can listen to it on the tablet outside. Thank you!</string>
     <!-- Database Update Acvitiy -->
     <string name="title_activity_database_update">Lullaby Database Update</string>
     <string name="update_title_text">Updating Locations</string>
