@@ -1,47 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/moon"
+        android:layout_width="1100px"
+        android:layout_height="1100px"
+        android:layout_centerInParent="true"
+        android:src="@drawable/moon"
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
-        style="@style/topLayout"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <com.drl.lutz.lullabyapp.views.TitleTextView
-            android:text="@string/upload_title_text"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            style="@style/titleText"/>
+        <LinearLayout
+            style="@style/topLayout"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/bodyText"
-            android:text="@string/upload_body_text"
-            style="@style/normalText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"/>
+            <com.drl.lutz.lullabyapp.views.TitleTextView
+                android:text="@string/upload_title_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/titleText"/>
 
-        <ProgressBar
-            style="@style/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:max="100"/>
+            <TextView
+                android:id="@+id/bodyText"
+                android:text="@string/upload_body_text"
+                style="@style/normalText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"/>
 
+            <ProgressBar
+                style="@style/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:max="100"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/bottomLayout">
+
+            <Button
+                android:id="@+id/doneButton"
+                style="@style/bigButton"
+                android:background="@drawable/accept_button"
+                android:onClick="onAcceptButtonClicked"
+                android:enabled="false"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        style="@style/bottomLayout">
-
-        <Button
-            android:id="@+id/doneButton"
-            style="@style/bigButton"
-            android:background="@drawable/accept_button"
-            android:onClick="onAcceptButtonClicked"
-            android:enabled="false"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

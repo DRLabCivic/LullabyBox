@@ -6,7 +6,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@drawable/app_bg</item>
+        <item name="android:windowBackground">@drawable/bg</item>
         <item name="android:textColor">@color/foreground</item>
         <item name="android:textSize">28sp</item>
         <item name="android:fontFamily">sans-serif-thin</item>
@@ -21,6 +21,7 @@
         <item name="android:layout_weight">0.65</item>
         <item name="android:paddingLeft">40px</item>
         <item name="android:paddingRight">40px</item>
+        <item name="android:paddingTop">40dp</item>
     </style>
 
     <style name="bottomLayout">
@@ -29,7 +30,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:layout_weight">0.35</item>
+        <item name="android:layout_weight">0.3</item>
     </style>
 
     <!-- Text styles -->
