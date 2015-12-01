@@ -20,7 +20,7 @@ Aixirivali, Andorra	0	ad	06	42.4666667	1.5
 
 All values are tab seperated.
 
-**Important:** Take care that the sql file is saved with utf-8 encoding.
+**Important:** Take care that the sql file is saved with utf-8 encoding. -> Open in Sublime and Save with UTF8 Encoding.
 
 ## Webserver Settings
 
